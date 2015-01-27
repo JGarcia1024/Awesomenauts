@@ -11,9 +11,20 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
+
+		this.body.setVelocity(5, 0);
+
 	},
 
-	update: function() {
+	update: function(delta){
+		if(me.input.isKeyPressed("right")){
+			this.body.vel.x += this.body.accel.x * me.timer.tick;
+		}else{
+			this.body.vel.x = 0;
+		}
+
+		this.body.update(delta);
+		return true;
 
 	}
 });
