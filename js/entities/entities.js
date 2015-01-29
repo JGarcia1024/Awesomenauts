@@ -11,9 +11,9 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
-
+			//sets the spawn
 		this.body.setVelocity(5, 20);
-
+			//grabs animation from image
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
 
@@ -22,6 +22,7 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	update: function(delta){
+			//binds a key
 		if(me.input.isKeyPressed("right")){
 			//adds to the position of my x by the velocity defined above in
 			//setVelocity() and multiplying it by me.timer.tick.
@@ -32,7 +33,7 @@ game.PlayerEntity = me.Entity.extend({
 		else{
 			this.body.vel.x = 0;
 		}
-
+			//sets current animation
 		if(this.body.vel.x !== 0){
 			if(!this.renderable.isCurrentAnimation("walk")){
 				this.renderable.setCurrentAnimation("walk");
