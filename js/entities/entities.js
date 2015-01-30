@@ -76,7 +76,6 @@ game.PlayerBaseEntity = me.Entity.extend({
 		if(this.health<=0){
 		}
 		this.body.update(delta);
-	}
 
 	this._super(me.Entity, "update", [delta]);
 	return true;
