@@ -13,6 +13,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 			//sets the spawn
 		this.body.setVelocity(5, 20);
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 			//grabs animation from image
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
@@ -50,10 +51,11 @@ game.PlayerEntity = me.Entity.extend({
 
 	}
 });
-
+	//adds base class
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
 		this._super(me.Entity, 'init', [x, y, {
+			//adds image
 			image: "tower",
 			width: 100,
 			height: 100,
@@ -63,17 +65,25 @@ game.PlayerBaseEntity = me.Entity.extend({
 				return (new me.Rect(0, 0, 100, 100)).toPolygon();
 			}
 		}]);
-
+			//variable that say that tower is not destroyed
 		this.broken = false;
 		this.health = 10;
 		this.alwaysUpdate = true;
-		this.body.onCollision.bind(this);
+		//if someone runs with the tower, they will collide
+		this.body.onCollision = this.onCollision.bind(this);
 		
 		this.type = "PlayerBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
 	},
 
 	update:function(delta) {
+		//if health is below 0, then you should die
 		if(this.health<=0){
+			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 
@@ -85,4 +95,49 @@ game.PlayerBaseEntity = me.Entity.extend({
 		
 	}	
 
-})
+});
+
+game.EnemyBaseEntity = me.Entity.extend({
+	init : function(x, y, settings){
+		this._super(me.Entity, 'init', [x, y, {
+			//adds image
+			image: "tower",
+			width: 100,
+			height: 100,
+			spritewidth: "100",
+			spriteheight: "100",
+			getShape: function() {
+				return (new me.Rect(0, 0, 100, 100)).toPolygon();
+			}
+		}]);
+			//variable that say that tower is not destroyed
+		this.broken = false;
+		this.health = 10;
+		this.alwaysUpdate = true;
+		//if someone runs with the tower, they will collide
+		this.body.onCollision = this.onCollision.bind(this);
+		
+		this.type = "EnemyBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
+	},
+
+	update:function(delta) {
+		//if health is below 0, then you should die
+		if(this.health<=0){
+			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
+		}
+		this.body.update(delta);
+
+	this._super(me.Entity, "update", [delta]);
+	return true;
+	},
+
+	onCollision: function(){
+		
+	}	
+
+});
