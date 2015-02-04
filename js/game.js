@@ -40,6 +40,7 @@ var game = {
 	// Run on game resources loaded.
 	"loaded" : function () {
 		me.pool.register("player", game.PlayerEntity, true);
+		//Adding both Enemy and Player base to game from Tile
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 

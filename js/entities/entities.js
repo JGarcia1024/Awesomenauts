@@ -13,6 +13,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 			//sets the spawn
 		this.body.setVelocity(5, 20);
+		//makes the screen follow the player
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 			//grabs animation from image
 		this.renderable.addAnimation("idle", [78]);
@@ -74,8 +75,11 @@ game.PlayerBaseEntity = me.Entity.extend({
 		
 		this.type = "PlayerBaseEntity";
 
+		//adds animation for PlayerBase
 		this.renderable.addAnimation("idle", [0]);
+		//burning animation
 		this.renderable.addAnimation("broken", [1]);
+		//normal animation
 		this.renderable.setCurrentAnimation("idle");
 	},
 
@@ -118,9 +122,11 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 		
 		this.type = "EnemyBaseEntity";
-
+			//sets animation for EnemyBase
 		this.renderable.addAnimation("idle", [0]);
+			//burned base
 		this.renderable.addAnimation("broken", [1]);
+			//fixed base
 		this.renderable.setCurrentAnimation("idle");
 	},
 
