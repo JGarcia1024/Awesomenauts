@@ -33,13 +33,17 @@ game.PlayerEntity = me.Entity.extend({
 			//me.timer.tick makes the movement look smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 			this.flipX(true);
+			//set player to move left
 		}else if(me.input.isKeyPressed("left")){
 			this.body.vel.x -=this.body.accel.x * me.timer.tick;
+			//flips animation
 			this.flipX(false);	
 		}else{
 			this.body.vel.x = 0;
 		}
-
+			//sets animation
+			// && !this.jumping && !this.falling makes it so you can't
+			// double jump while jumping or falling
 		if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling){
 			this.jumping = true;
 			this.body.vel.y -= this.body.accel.y * me.timer.tick;
