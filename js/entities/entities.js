@@ -24,6 +24,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	},
 
+
 	update: function(delta){
 			//binds a key
 		if(me.input.isKeyPressed("right")){
@@ -32,10 +33,20 @@ game.PlayerEntity = me.Entity.extend({
 			//me.timer.tick makes the movement look smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 			this.flipX(true);
-		}
-		else{
+		}else if(me.input.isKeyPressed("left")){
+			this.body.vel.x -=this.body.accel.x * me.timer.tick;
+			this.flipX(false);	
+		}else{
 			this.body.vel.x = 0;
 		}
+
+		if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling){
+			this.jumping = true;
+			this.body.vel.y -= this.body.accel.y * me.timer.tick;
+		}
+
+
+
 			//takes binded key from play.js and uses it
 		if(me.input.isKeyPressed("attack")){
 			if(!this.renderable.isCurrentAnimation("attack")){
@@ -85,7 +96,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 			spritewidth: "100",
 			spriteheight: "100",
 			getShape: function() {
-				return (new me.Rect(0, 0, 100, 100)).toPolygon();
+				return (new me.Rect(0, 0, 100, 70)).toPolygon();
 			}
 		}]);
 			//variable that say that tower is not destroyed
@@ -133,7 +144,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 			spritewidth: "100",
 			spriteheight: "100",
 			getShape: function() {
-				return (new me.Rect(0, 0, 100, 100)).toPolygon();
+				return (new me.Rect(0, 0, 100, 70)).toPolygon();
 			}
 		}]);
 			//variable that say that tower is not destroyed
