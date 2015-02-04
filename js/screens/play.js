@@ -10,7 +10,9 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		var player = me.pool.pull("player", 0 ,420, {});
 		me.game.world.addChild(player, 5);
+		//sets right key to move play right
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
+		//sets A key to attack
 		me.input.bindKey(me.input.KEY.A, "attack");
 
 		// add our HUD to the game world
