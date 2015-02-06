@@ -13,7 +13,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 			//sets the spawn
 		this.body.setVelocity(5, 20);
-		//makes the screen follow the player
+		//Keeps track of which direction your character is going
 		this.facing = "right";
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 			//grabs animation from image
@@ -84,7 +84,7 @@ game.PlayerEntity = me.Entity.extend({
 				this.renderable.setAnimationFrame();
 			}
 		}
-
+			//Makes perameter
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 
 		this.body.update(delta);
@@ -93,17 +93,19 @@ game.PlayerEntity = me.Entity.extend({
 		return true;
 
 	},
-
+			//Hold all information for collision
 	collideHandler: function(response){
 		if(response.b.type==='EnemyBaseEntity'){
 			var ydif = this.pos.y - response.b.pos.y;
 			var xdif = this.pos.x - response.b.pos.x;
 
 			console.log("xdif" + xdif + ydif);
-
+			//sets barrier on right side of the enemy base
 			if(xdif>-35 && this.facing=='right' && (xdif<0)){
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x -1;
+			//sets barrier on left side of the enemy base
+			// && x(y)dif>(<)0 makes it so the barrier doesn't work while facibg the other way
 			}else if(xdif<70 && this.facing=='left' && xdif>0){
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x +1;
