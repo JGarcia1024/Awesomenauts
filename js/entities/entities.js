@@ -254,7 +254,7 @@ game.EnemyCreep = me.Entity.extend({
 
 	}
 });
-
+	//function that sets timer for creep
 game.GameManager = Object.extend({
 	init: function(x, y, settings){
 		this.now = new Date().getTime();
@@ -265,7 +265,7 @@ game.GameManager = Object.extend({
 
 	update: function(){
 		this.now = new Date().getTime();
-
+		//stuff
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
 			var creep = me.pool.pull("EnemyCreep", 1000, 0, {});
