@@ -15,6 +15,9 @@ game.PlayerEntity = me.Entity.extend({
 		this.body.setVelocity(5, 20);
 		//Keeps track of which direction your character is going
 		this.facing = "right";
+		this.now = new Date().getTime();
+		this.lastHit = this.now;
+		this.lastAttack = new Date().getTime();
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 			//grabs animation from image
 		this.renderable.addAnimation("idle", [78]);
@@ -27,6 +30,7 @@ game.PlayerEntity = me.Entity.extend({
 
 
 	update: function(delta){
+		this.now = new Date().getTime();
 			//binds a key
 		if(me.input.isKeyPressed("right")){
 			//adds to the position of my x by the velocity defined above in
@@ -69,20 +73,12 @@ game.PlayerEntity = me.Entity.extend({
 		}
 
 			//sets current animation
-		else if(this.body.vel.x !== 0){
+		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")){
 			if(!this.renderable.isCurrentAnimation("walk")){
 				this.renderable.setCurrentAnimation("walk");
 			}
-		}
-		else{
+		}else if(!this.renderable.isCurrentAnimation("attack")){
 			this.renderable.setCurrentAnimation("idle");
-		}
-
-		if(me.input.isKeyPressed("attack")){
-			if(!this.renderable.isCurrentAnimation("attack")){
-				this.renderable.setCurrentAnimation("attack", "idle");
-				this.renderable.setAnimationFrame();
-			}
 		}
 			//Makes perameter
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -116,9 +112,16 @@ game.PlayerEntity = me.Entity.extend({
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x +1;
 			}
+		
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000){
+				this.lastHit = this.now;
+				response.b.loseHealth();
+			}
+
 		}
 	}
 });
+
 	//adds base class
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
@@ -211,6 +214,10 @@ game.EnemyBaseEntity = me.Entity.extend({
 
 	onCollision: function(){
 		
-	}	
+	},
+
+	loseHealth: function(){
+		this.health--;
+	}
 
 });
