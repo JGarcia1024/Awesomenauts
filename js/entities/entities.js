@@ -100,7 +100,8 @@ game.PlayerEntity = me.Entity.extend({
 			var xdif = this.pos.x - response.b.pos.x;
 
 			console.log("xdif" + xdif + ydif);
-			
+			//sets barrier on the top of the enemy base
+			//y axis must come first because it;s more important
 			if(ydif<-40 && xdif< 70 && xdif>-35){
 				this.body.falling = false;
 				this.body.vel.y = -1;
