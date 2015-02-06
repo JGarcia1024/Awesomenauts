@@ -15,6 +15,7 @@ game.PlayerEntity = me.Entity.extend({
 		this.body.setVelocity(5, 20);
 		//Keeps track of which direction your character is going
 		this.facing = "right";
+		//states the amount of hit
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
 		this.lastAttack = new Date().getTime();
@@ -112,7 +113,8 @@ game.PlayerEntity = me.Entity.extend({
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x +1;
 			}
-		
+			//sets the amount of hits it take to destroy
+			//the enemy base
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000){
 				this.lastHit = this.now;
 				response.b.loseHealth();
@@ -204,6 +206,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		//if health is below 0, then you should die
 		if(this.health<=0){
 			this.broken = true;
+		//renders broken animation
 			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
@@ -215,7 +218,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 	onCollision: function(){
 		
 	},
-
+	//loss of health
 	loseHealth: function(){
 		this.health--;
 	}
