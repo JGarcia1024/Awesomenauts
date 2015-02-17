@@ -167,6 +167,10 @@ game.PlayerBaseEntity = me.Entity.extend({
 	return true;
 	},
 
+	loseHealth: function(damage){
+		this.health = this.health - damage;
+	},
+
 	onCollision: function(){
 		
 	}	
@@ -241,6 +245,10 @@ game.EnemyCreep = me.Entity.extend({
 		//gives health
 		this.health = 10;
 		this.alwaysUpdate = true;
+		this.attacking = false;
+		this.lastAttacking = new Date().getTime();
+		this.lastHit = new Date().getTime();
+		this.now = new Date().getTime();
 		//sets speed
 		this.body.setVelocity(3, 20);
 
@@ -250,9 +258,35 @@ game.EnemyCreep = me.Entity.extend({
 		this.renderable.setCurrentAnimation("walk");
 	},
 
-	update: function(){
+	update: function(delta){
+		this.now = new Date().getTime();
 
+		this.body.vel.x -= this.body.accel.x * me.timer.tick;
+
+		me.collision.check(this, true, this.collideHandler.bind(this), true);
+		
+
+		this.body.update(delta);
+
+
+		this._super(me.Entity, "update", [delta]);
+		return true;
+
+	},
+
+	collideHandler: function(response){
+		if(response.b.type==='PlayerBase'){
+			this.attacking=true;
+			//this.lastAttacking=this.now;
+			this.body.vel.x = 0;
+			this.pos.x = this.pos.x + 1;
+			if((this.now-this.lastHit >= 1000)){
+				this.lasHit = this.now;
+				response.b.loseHealth(1);
+			}
+		}
 	}
+
 });
 	//function that sets timer for creep
 game.GameManager = Object.extend({
@@ -269,7 +303,7 @@ game.GameManager = Object.extend({
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
 			var creep = me.pool.pull("EnemyCreep", 1000, 0, {});
-			me.game.world.addChild(creepe, 5);
+			me.game.world.addChild(creep, 5);
 		}
 
 		return true;
