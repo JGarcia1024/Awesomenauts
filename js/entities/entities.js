@@ -11,6 +11,7 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
+		this.type = "PlayerEntity";
 			//sets the spawn
 		this.body.setVelocity(5, 20);
 		//Keeps track of which direction your character is going
@@ -89,7 +90,17 @@ game.PlayerEntity = me.Entity.extend({
 		this._super(me.Entity, "update", [delta]);
 		return true;
 
+
+
 	},
+
+loseHealth: function(damage){
+	this.health = this.health - damage;
+},
+
+
+
+
 			//Hold all information for collision
 	collideHandler: function(response){
 		if(response.b.type==='EnemyBaseEntity'){
@@ -144,8 +155,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.alwaysUpdate = true;
 		//if someone runs with the tower, they will collide
 		this.body.onCollision = this.onCollision.bind(this);
-		
-		this.type = "PlayerBaseEntity";
+		this.type = "PlayerBase";
 
 		//adds animation for PlayerBase
 		this.renderable.addAnimation("idle", [0]);
@@ -276,6 +286,16 @@ game.EnemyCreep = me.Entity.extend({
 
 	collideHandler: function(response){
 		if(response.b.type==='PlayerBase'){
+			this.attacking=true;
+			this.lastAttacking=this.now;
+			//this.lastAttacking=this.now;
+			this.body.vel.x = 0;
+			this.pos.x = this.pos.x + 1;
+			if((this.now-this.lastHit >= 1000)){
+				this.lasHit = this.now;
+				response.b.loseHealth(1);
+			}
+		}else if (response.b.type===''){
 			this.attacking=true;
 			//this.lastAttacking=this.now;
 			this.body.vel.x = 0;
