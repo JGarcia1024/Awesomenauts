@@ -12,6 +12,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 		this.type = "PlayerEntity";
+		//gives player a certain amount of health
 		this.health = 20;
 			//sets the spawn
 		this.body.setVelocity(5, 20);
@@ -256,8 +257,11 @@ game.EnemyCreep = me.Entity.extend({
 		//gives health
 		this.health = 10;
 		this.alwaysUpdate = true;
+		//this.attacking lets us know if the enemy is currently attacking
 		this.attacking = false;
+		//keeps track of when our creep last attacked anything
 		this.lastAttacking = new Date().getTime();
+		//keep track of the last time our creep hit anything
 		this.lastHit = new Date().getTime();
 		this.now = new Date().getTime();
 		//sets speed
@@ -292,6 +296,7 @@ game.EnemyCreep = me.Entity.extend({
 			//this.lastAttacking=this.now;
 			this.body.vel.x = 0;
 			this.pos.x = this.pos.x + 1;
+			//makes player lose health
 			if((this.now-this.lastHit >= 1000)){
 				this.lasHit = this.now;
 				response.b.loseHealth(1);
@@ -304,6 +309,7 @@ game.EnemyCreep = me.Entity.extend({
 			this.pos.x = this.pos.x + 1;
 			this.body.vel.x = 0;
 			}
+			//gives health to player
 			if((this.now-this.lastHit >= 1000) && xdif>0){
 				this.lasHit = this.now;
 				response.b.loseHealth(1);
