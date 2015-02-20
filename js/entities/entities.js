@@ -12,6 +12,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 		this.type = "PlayerEntity";
+		this.health = 20;
 			//sets the spawn
 		this.body.setVelocity(5, 20);
 		//Keeps track of which direction your character is going
@@ -96,8 +97,8 @@ game.PlayerEntity = me.Entity.extend({
 
 loseHealth: function(damage){
 	this.health = this.health - damage;
+	console.log(this.health);
 },
-
 
 
 
@@ -295,12 +296,15 @@ game.EnemyCreep = me.Entity.extend({
 				this.lasHit = this.now;
 				response.b.loseHealth(1);
 			}
-		}else if (response.b.type===''){
+		}else if (response.b.type==='PlayerEntity'){
+			var xdif = this.pos.x - response.b.pos.x;
 			this.attacking=true;
 			//this.lastAttacking=this.now;
-			this.body.vel.x = 0;
+			if(xdif>0){
 			this.pos.x = this.pos.x + 1;
-			if((this.now-this.lastHit >= 1000)){
+			this.body.vel.x = 0;
+			}
+			if((this.now-this.lastHit >= 1000) && xdif>0){
 				this.lasHit = this.now;
 				response.b.loseHealth(1);
 			}
