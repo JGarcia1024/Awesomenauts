@@ -40,9 +40,6 @@ game.PlayerEntity = me.Entity.extend({
 		//executes if player dies then sets the respawn point
 		if(this.health <= 0){
 			this.dead = true;
-			this.pos.x = 10;
-			this.pos.y = 0;
-			this.health = game.data.playerHealth;
 		}
 
 			//binds a key
@@ -129,12 +126,12 @@ loseHealth: function(damage){
 			//sets barrier on right side of the enemy base
 			else if(xdif>-35 && this.facing=='right' && (xdif<0)){
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x -1;
+				//this.pos.x = this.pos.x -1;
 			//sets barrier on left side of the enemy base
 			// && x(y)dif>(<)0 makes it so the barrier doesn't work while facibg the other way
 			}else if(xdif<70 && this.facing=='left' && xdif>0){
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x +1;
+				//this.pos.x = this.pos.x +1;
 			}
 			//sets the amount of hits it take to destroy
 			//the enemy base
@@ -149,7 +146,7 @@ loseHealth: function(damage){
 			var ydif = this.pos.y - response.b.pos.y;
 			//creates left side damage for creep
 			if (xdif>0){
-				this.pos.x = this.pos.x + 1;
+				//this.pos.x = this.pos.x + 1;
 				if(this.facing==="left"){
 					this.body.vel.x = 0;
 				}
@@ -372,6 +369,11 @@ game.GameManager = Object.extend({
 
 	update: function(){
 		this.now = new Date().getTime();
+
+		if(game.data.player.dead){
+			me.game.world.removeChild(game.data.player);
+			me.state.current().resetPlayer(10, 0);
+		}
 		//stuff
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
