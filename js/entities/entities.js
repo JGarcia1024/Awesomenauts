@@ -21,6 +21,7 @@ game.PlayerEntity = me.Entity.extend({
 		//states the amount of hit
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
+		//makes player die to respawn
 		this.dead = false;
 		this.lastAttack = new Date().getTime();
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
@@ -36,7 +37,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta){
 		this.now = new Date().getTime();
-
+		//executes if player dies then sets the respawn point
 		if(this.health <= 0){
 			this.dead = true;
 			this.pos.x = 10;

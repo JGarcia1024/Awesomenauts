@@ -6,6 +6,7 @@ var game = {
 	data : {
 		// score
 		score : 0,
+		//adds easy shortcuts to entities.js as long as you use them
 		enemyBaseHealth: 10,
 		playerBaseHealth: 10,
 		enemyCreepHealth: 10,
