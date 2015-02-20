@@ -13,14 +13,15 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 		this.type = "PlayerEntity";
 		//gives player a certain amount of health
-		this.health = 20;
+		this.health = game.data.playerHealth;
 			//sets the spawn
-		this.body.setVelocity(5, 20);
+		this.body.setVelocity(game.data.playerMoveSpeed, 20);
 		//Keeps track of which direction your character is going
 		this.facing = "right";
 		//states the amount of hit
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
+		this.dead = false;
 		this.lastAttack = new Date().getTime();
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 			//grabs animation from image
@@ -35,6 +36,14 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta){
 		this.now = new Date().getTime();
+
+		if(this.health <= 0){
+			this.dead = true;
+			this.pos.x = 10;
+			this.pos.y = 0;
+			this.health = game.data.playerHealth;
+		}
+
 			//binds a key
 		if(me.input.isKeyPressed("right")){
 			//adds to the position of my x by the velocity defined above in
@@ -128,9 +137,9 @@ loseHealth: function(damage){
 			}
 			//sets the amount of hits it take to destroy
 			//the enemy base
-			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000){
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer){
 				this.lastHit = this.now;
-				response.b.loseHealth();
+				response.b.loseHealth(game.data.playerAttack);
 			}
 
 			//adds left sides to creep
@@ -150,12 +159,12 @@ loseHealth: function(damage){
 					this.body.vel.x = 0;
 				}
 			}
-			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
 				&& (Math.abs(ydif) <=40) && 
 				(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
 				){
 				this.lastHit = this.now;
-				response.b.loseHealth(1);
+				response.b.loseHealth(game.data.playerAttack);
 			}
 		}
 	}
@@ -177,7 +186,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 		}]);
 			//variable that say that tower is not destroyed
 		this.broken = false;
-		this.health = 10;
+		this.health = game.data.playerBaseHealth;
 		this.alwaysUpdate = true;
 		//if someone runs with the tower, they will collide
 		this.body.onCollision = this.onCollision.bind(this);
@@ -228,7 +237,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		}]);
 			//variable that say that tower is not destroyed
 		this.broken = false;
-		this.health = 10;
+		this.health = game.data.enemyBaseHealth;
 		this.alwaysUpdate = true;
 		//if someone runs with the tower, they will collide
 		this.body.onCollision = this.onCollision.bind(this);
@@ -279,7 +288,7 @@ game.EnemyCreep = me.Entity.extend({
 			}
 		}]);
 		//gives health
-		this.health = 10;
+		this.health = game.data.enemyCreepHealth;
 		this.alwaysUpdate = true;
 		//this.attacking lets us know if the enemy is currently attacking
 		this.attacking = false;
@@ -332,7 +341,7 @@ game.EnemyCreep = me.Entity.extend({
 			//makes player lose health
 			if((this.now-this.lastHit >= 1000)){
 				this.lasHit = this.now;
-				response.b.loseHealth(1);
+				response.b.loseHealth(game.data.enemyCreepAttack);
 			}
 		}else if (response.b.type==='PlayerEntity'){
 			var xdif = this.pos.x - response.b.pos.x;
