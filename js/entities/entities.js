@@ -133,15 +133,17 @@ loseHealth: function(damage){
 				response.b.loseHealth();
 			}
 
+			//adds left sides to creep
 		}else if(response.b.type==='EnemyCreep'){
 			var xdif = this.pos.x - response.b.pos.x;
 			var ydif = this.pos.y - response.b.pos.y;
-
+			//creates left side damage for creep
 			if (xdif>0){
 				this.pos.x = this.pos.x + 1;
 				if(this.facing==="left"){
 					this.body.vel.x = 0;
 				}
+			//adds right side to creep 
 			}else{
 				this.pos.x = this.pos.x - 1;
 				if(this.facing==="right"){
@@ -294,11 +296,11 @@ game.EnemyCreep = me.Entity.extend({
 		this.renderable.addAnimation("walk", [3, 4, 5], 80);
 		this.renderable.setCurrentAnimation("walk");
 	},
-
+		//registers creep health
 	loseHealth: function(damage){
 		this.health = this.health - damage;
 	},
-
+		//shows health
 	update: function(delta){
 		console.log(this.health);
 		if(this.health <= 0){
