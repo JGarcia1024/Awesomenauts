@@ -23,6 +23,7 @@ game.PlayerEntity = me.Entity.extend({
 		this.lastHit = this.now;
 		//makes player die to respawn
 		this.dead = false;
+		//saves the data when the plaer attacks for game.js
 		this.attack = game.data.playerAttack;
 		this.lastAttack = new Date().getTime();
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
@@ -162,8 +163,10 @@ loseHealth: function(damage){
 				&& (Math.abs(ydif) <=40) && 
 				(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
 				){
+				//function adds gold
 				this.lastHit = this.now;
 				if(response.b.health <= game.data.playerAttack){
+				//if adds 1 gold when creep dies
 					game.data.gold += 1;
 					console.log("Current gold: " + game.data.gold); 
 				}
@@ -379,7 +382,7 @@ game.GameManager = Object.extend({
 			me.game.world.removeChild(game.data.player);
 			me.state.current().resetPlayer(10, 0);
 		}
-
+		//stores gold
 		if(Math.round(this.now/1000)%20 ===0 && (this.now - this.lastCreep >= 1000)){
 			game.data.gold += 1;
 			console.log("Current gold: " + game.data.gold);
