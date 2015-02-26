@@ -16,7 +16,7 @@ game.PlayerEntity = me.Entity.extend({
 		this.renderable.setCurrentAnimation("idle");
 
 	},
-
+	//New functions bellow help code be organize
 	setSuper: function(){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",
