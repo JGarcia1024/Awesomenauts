@@ -1,6 +1,23 @@
 //adds a specific player
 game.PlayerEntity = me.Entity.extend({
 	init: function(x, y, settings) {
+		this.setSuper();
+		this.setPlayerTimers();
+		this.setAttributes();
+
+		this.type = "PlayerEntity";
+		this.setFlags();
+		//saves the data when the plaer attacks for game.js
+		this.attack = game.data.playerAttack;
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+
+		this.addAnimation();
+			
+		this.renderable.setCurrentAnimation("idle");
+
+	},
+
+	setSuper: function(){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",
 			width: 64,
@@ -11,28 +28,36 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
-		this.type = "PlayerEntity";
-		//gives player a certain amount of health
-		this.health = game.data.playerHealth;
-			//sets the spawn
-		this.body.setVelocity(game.data.playerMoveSpeed, 20);
-		//Keeps track of which direction your character is going
-		this.facing = "right";
+
+	},
+
+	setPlayerTimers: function(){
 		//states the amount of hit
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
+		this.lastAttack = new Date().getTime();
+
+	},
+
+	setAttributes: function(){
+		//gives player a certain amount of health
+		this.health = game.data.playerHealth;
+		//sets the spawn
+		this.body.setVelocity(game.data.playerMoveSpeed, 20);
+	},
+
+	setFlags: function(){
+		//Keeps track of which direction your character is going
+		this.facing = "right";
 		//makes player die to respawn
 		this.dead = false;
-		//saves the data when the plaer attacks for game.js
-		this.attack = game.data.playerAttack;
-		this.lastAttack = new Date().getTime();
-		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-			//grabs animation from image
+	},
+
+	addAnimation: function(){
+		//grabs animation from image
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
 		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
-
-		this.renderable.setCurrentAnimation("idle");
 
 	},
 
