@@ -64,9 +64,9 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta){
 		this.now = new Date().getTime();
-
+		//variable that checks if my player died
 		this.dead = checkIfDead();
-
+		//new variable that checks if my keys are pressed
 		this.checkKeyPressedAndMove();
 
 			//takes binded key from play.js and uses it
