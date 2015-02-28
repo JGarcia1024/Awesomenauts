@@ -160,6 +160,14 @@ loseHealth: function(damage){
 			//Hold all information for collision
 	collideHandler: function(response){
 		if(response.b.type==='EnemyBaseEntity'){
+			this.collideWithEnemyBase(response);
+			//adds left sides to creep
+		}else if(response.b.type==='EnemyCreep'){
+			this.collidewithEnemyCreep(response);
+		}
+	},
+
+	collideWithEnemyBase(response){
 			var ydif = this.pos.y - response.b.pos.y;
 			var xdif = this.pos.x - response.b.pos.x;
 
@@ -173,12 +181,9 @@ loseHealth: function(damage){
 			//sets barrier on right side of the enemy base
 			else if(xdif>-35 && this.facing=='right' && (xdif<0)){
 				this.body.vel.x = 0;
-				//this.pos.x = this.pos.x -1;
-			//sets barrier on left side of the enemy base
-			// && x(y)dif>(<)0 makes it so the barrier doesn't work while facibg the other way
+
 			}else if(xdif<70 && this.facing=='left' && xdif>0){
 				this.body.vel.x = 0;
-				//this.pos.x = this.pos.x +1;
 			}
 			//sets the amount of hits it take to destroy
 			//the enemy base
@@ -186,14 +191,22 @@ loseHealth: function(damage){
 				this.lastHit = this.now;
 				response.b.loseHealth(game.data.playerAttack);
 			}
+	},
 
-			//adds left sides to creep
-		}else if(response.b.type==='EnemyCreep'){
+	collideWithEnemyCreep: function(response){
+
 			var xdif = this.pos.x - response.b.pos.x;
 			var ydif = this.pos.y - response.b.pos.y;
 			//creates left side damage for creep
-			if (xdif>0){
-				//this.pos.x = this.pos.x + 1;
+			this.stopMovement(xdif);
+
+			if(this.checkAttack(xdif, ydif)){
+					this.hitCreep(response);
+			};
+			
+	},
+	stopMovement: function(xdif){
+				if (xdif>0){
 				if(this.facing==="left"){
 					this.body.vel.x = 0;
 				}
@@ -204,21 +217,26 @@ loseHealth: function(damage){
 					this.body.vel.x = 0;
 				}
 			}
-			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+	},
+	checkAttack: function(xdif, ydif){
+		if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
 				&& (Math.abs(ydif) <=40) && 
 				(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
 				){
 				//function adds gold
 				this.lastHit = this.now;
-				if(response.b.health <= game.data.playerAttack){
+				return true;
+		}
+		return false;
+	},
+	hitCreep: function(response){
+		if(response.b.health <= game.data.playerAttack){
 				//if adds 1 gold when creep dies
 					game.data.gold += 1;
 					console.log("Current gold: " + game.data.gold); 
 				}
-				response.b.loseHealth(game.data.playerAttack);
-			}
-		}
-	}
+				response.b.loseHealth(game.data.playerAttack);				
+	},
 });
 
 
