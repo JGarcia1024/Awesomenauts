@@ -64,37 +64,10 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta){
 		this.now = new Date().getTime();
-		//executes if player dies then sets the respawn point
-		if(this.health <= 0){
-			this.dead = true;
-		}
 
-			//binds a key
-		if(me.input.isKeyPressed("right")){
-			//adds to the position of my x by the velocity defined above in
-			//setVelocity() and multiplying it by me.timer.tick.
-			//me.timer.tick makes the movement look smooth
-			this.body.vel.x += this.body.accel.x * me.timer.tick;
-			this.facing = "right";
-			this.flipX(true);
-			//set player to move left
-		}else if(me.input.isKeyPressed("left")){
-			this.facing = "left";
-			this.body.vel.x -=this.body.accel.x * me.timer.tick;
-			//flips animation
-			this.flipX(false);	
-		}else{
-			this.body.vel.x = 0;
-		}
-			//sets animation
-			// && !this.jumping && !this.falling makes it so you can't
-			// double jump while jumping or falling
-		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
-			this.body.jumping = true;
-			this.body.vel.y -= this.body.accel.y * me.timer.tick;
-		}
+		this.dead = checkIfDead();
 
-
+		this.checkKeyPressedAndMove();
 
 			//takes binded key from play.js and uses it
 		if(me.input.isKeyPressed("attack")){
@@ -129,6 +102,52 @@ game.PlayerEntity = me.Entity.extend({
 
 
 	},
+
+	checkIfDead: function(){
+		if(this.health <= 0){
+			return = true;
+		}
+		return false;
+	},
+
+	checkKeyPressedAndMove: function(){
+			//binds a key
+		if(me.input.isKeyPressed("right")){
+			this.moveRight();
+			//set player to move left
+		}else if(me.input.isKeyPressed("left")){
+			this.moveLeft();
+		}else{
+			this.body.vel.x = 0;
+		}
+			//sets animation
+			// && !this.jumping && !this.falling makes it so you can't
+			// double jump while jumping or falling
+		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
+			this.jump();
+		}
+	},
+
+	moveRight: function(){
+			//adds to the position of my x by the velocity defined above in
+			//setVelocity() and multiplying it by me.timer.tick.
+			//me.timer.tick makes the movement look smooth
+			this.body.vel.x += this.body.accel.x * me.timer.tick;
+			this.facing = "right";
+			this.flipX(true);
+	},
+
+	moveLeft: function(){
+			this.facing = "left";
+			this.body.vel.x -=this.body.accel.x * me.timer.tick;
+			//flips animation
+			this.flipX(false);	
+	},
+
+	jump: function(){
+			this.body.jumping = true;
+			this.body.vel.y -= this.body.accel.y * me.timer.tick;
+	};
 
 loseHealth: function(damage){
 	this.health = this.health - damage;
