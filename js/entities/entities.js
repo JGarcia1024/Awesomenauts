@@ -1,14 +1,12 @@
 //adds a specific player
 game.PlayerEntity = me.Entity.extend({
 	init: function(x, y, settings) {
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setPlayerTimers();
 		this.setAttributes();
 
 		this.type = "PlayerEntity";
 		this.setFlags();
-		//saves the data when the plaer attacks for game.js
-		this.attack = game.data.playerAttack;
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		this.addAnimation();
@@ -17,7 +15,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	},
 	//New functions bellow help code be organize
-	setSuper: function(){
+	setSuper: function(x, y){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",
 			width: 64,
@@ -44,6 +42,8 @@ game.PlayerEntity = me.Entity.extend({
 		this.health = game.data.playerHealth;
 		//sets the spawn
 		this.body.setVelocity(game.data.playerMoveSpeed, 20);
+				//saves the data when the plaer attacks for game.js
+		this.attack = game.data.playerAttack;
 	},
 
 	setFlags: function(){
@@ -66,7 +66,7 @@ game.PlayerEntity = me.Entity.extend({
 	update: function(delta){
 		this.now = new Date().getTime();
 		//variable that checks if my player died
-		this.dead = checkIfDead();
+		this.dead = this.checkIfDead();
 		//new variable that checks if my keys are pressed
 		this.checkKeyPressedAndMove();
 		this.setAnimation();
@@ -80,7 +80,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	checkIfDead: function(){
 		if(this.health <= 0){
-			return = true;
+			return true;
 		}
 		return false;
 	},
@@ -163,11 +163,11 @@ loseHealth: function(damage){
 			this.collideWithEnemyBase(response);
 			//adds left sides to creep
 		}else if(response.b.type==='EnemyCreep'){
-			this.collidewithEnemyCreep(response);
+			this.collideWithEnemyCreep(response);
 		}
 	},
 
-	collideWithEnemyBase(response){
+	collideWithEnemyBase: function(response){
 			var ydif = this.pos.y - response.b.pos.y;
 			var xdif = this.pos.x - response.b.pos.x;
 
