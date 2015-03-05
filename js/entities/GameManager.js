@@ -47,13 +47,14 @@ game.HeroDeathManager = Object.extend({
 		return true;
 	}
 });
-
+	//new function for gaining experience
 game.ExperienceManager = Object.extend({
 	init: function(x, y, settings){
 		this.alwaysUpdate = true;
 	},
 
 	update: function(){
+	//checks to see if you won the game or not to givev you bonus xp
 		if(game.data.win === true){
 			game.data.exp += 10;
 		}else if(game.data.win === false){
