@@ -64,15 +64,18 @@ game.ExperienceManager = Object.extend({
 		console.log(game.data.exp);
 		return true;
 	},
-
+	//makes an exp function
 	gameOver: function(win){
 		if(win){
+	//sets exp when game is over and won
 			game.data.exp += 10;
 		}else{
+	//sets exp when game is over and lost
 			game.data.exp += 1;
 		}
 		//creates gameover screen when you destroy enemy base
 		this.gameOver = true;
+		//saves exp
 		me.save.exp = game.data.exp;
 	}
 });
