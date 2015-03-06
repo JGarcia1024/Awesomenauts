@@ -57,15 +57,22 @@ game.ExperienceManager = Object.extend({
 	update: function(){
 	//checks to see if you won the game or not to givev you bonus xp
 		if(game.data.win === true && !this.gameOver){
-			game.data.exp += 10;
-			//creates gameover screen when you destroy enemy base
-			this.gameOver = true;
+			this.gameOver(true);
 		}else if(game.data.win === false && this.gameOver){
-			game.data.exp += 1;
-			//creates gameover screen when enemy destroys your base
-			this.gameOver = true;
+			this.gameOver(false);
 		}
 		console.log(game.data.exp);
 		return true;
+	},
+
+	gameOver: function(win){
+		if(win){
+			game.data.exp += 10;
+		}else{
+			game.data.exp += 1;
+		}
+		//creates gameover screen when you destroy enemy base
+		this.gameOver = true;
+		me.save.exp = game.data.exp;
 	}
 });
