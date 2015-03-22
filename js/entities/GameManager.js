@@ -51,14 +51,14 @@ game.HeroDeathManager = Object.extend({
 game.ExperienceManager = Object.extend({
 	init: function(x, y, settings){
 		this.alwaysUpdate = true;
-		this.gameOver = false;
+		this.gameover = false;
 	},
 
 	update: function(){
 	//checks to see if you won the game or not to givev you bonus xp
-		if(game.data.win === true && !this.gameOver){
+		if(game.data.win === true && !this.gameover){
 			this.gameOver(true);
-		}else if(game.data.win === false && this.gameOver){
+		}else if(game.data.win === false && this.gameover){
 			this.gameOver(false);
 		}
 		console.log(game.data.exp);
@@ -74,8 +74,9 @@ game.ExperienceManager = Object.extend({
 			game.data.exp += 1;
 		}
 		//creates gameover screen when you destroy enemy base
-		this.gameOver = true;
+		this.gameover = true;
 		//saves exp
 		me.save.exp = game.data.exp;
+		me.save.exp2 = 4;
 	}
 });
