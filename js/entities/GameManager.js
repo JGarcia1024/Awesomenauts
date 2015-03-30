@@ -99,5 +99,19 @@ game.ExperienceManager = Object.extend({
 	}
 });
 
-       
+game.SpendGold = Object.extend({
+	init: function (x, y, settings){
+		this.now = new Date().getTime();
+		this.lastBuy = new Date().getTime();
+		//creepe cannot pause at all
+		this.paused = false;
+		this.alwaysUpdate = true;
+	},
+
+	update: function(){
+		return true;
+	}
+
+
+});
 
