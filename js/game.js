@@ -91,7 +91,7 @@ var game = {
 		me.pool.register("EnemyBase", game.EnemyBaseEntity, true);
 		//loads the creep character
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
-
+		//adds player 2 into the game
 		me.pool.register("Player2", game.Player2, true);
 		// registers the timer into the game
 		me.pool.register("GameTimerManager", game.GameTimerManager);
@@ -99,6 +99,7 @@ var game = {
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 		//adds expierence manager into the game
 		me.pool.register("ExpierenceManager", game.ExpierenceManager);
+		//adds the resource spend gold into the game
 		me.pool.register("SpendGold", game.SpendGold);
 
 
