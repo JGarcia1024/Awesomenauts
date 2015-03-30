@@ -73,7 +73,7 @@ game.SpendGold = Object.extend({
 			}
 
 
-		})));
+		}));
 		me.game.world.addChild(game.data.buytext, 35);
 	},
 
@@ -90,7 +90,7 @@ game.SpendGold = Object.extend({
 		me.input.unbindKey(me.input.KEY.F5, "F5", true);
 		me.input.unbindKey(me.input.KEY.F6, "F6", true);
 		me.game.world.removeChild(game.data.buytext);
-	}
+	},
 
 //check that the buy keys are working
 checkBuyKeys: function(){

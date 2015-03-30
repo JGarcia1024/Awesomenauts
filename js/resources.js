@@ -14,12 +14,14 @@ game.resources = [
 	 {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
 	 //loads the image for our creep/ enemy
 	 {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
-
+	 // loads player 2s image
 	 {name: "Player2", type:"image", src: "data/img/gloop.png"},
-
+	 //loads title screen picture in the background
 	 {name: "title-screen", type:"image", src: "data/img/title.png"},
 	 {name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
 	 {name: "gold-screen", type:"image", src: "data/img/spend.png"},
+	 {name: "load-screen", type:"image", src: "data/img/loadpic.png"},
+	 {name: "new-screen", type:"image", src: "data/img/newpic.png"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},

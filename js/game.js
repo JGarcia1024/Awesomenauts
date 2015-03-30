@@ -63,6 +63,9 @@ var game = {
 	me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
 	me.state.SPENDEXP = 112;
+	me.state.LOAD = 113;
+	me.state.NEW = 114;
+
 
 	//prints out gameover function from gamemanager.js
 	//console.log(game.data.exp);
@@ -85,14 +88,14 @@ var game = {
 	"loaded" : function () {
 		// registers the character entitie into the game
 		me.pool.register("player", game.PlayerEntity, true);
+		//adds player 2 into the game
+		me.pool.register("Player2", game.Player2, true);
 		//registers the player base from melon js into the game
 		me.pool.register("PlayerBase", game.PlayerBaseEntity, true);
 		// registers the enemy base from melon js to the game
 		me.pool.register("EnemyBase", game.EnemyBaseEntity, true);
 		//loads the creep character
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
-		//adds player 2 into the game
-		me.pool.register("Player2", game.Player2, true);
 		// registers the timer into the game
 		me.pool.register("GameTimerManager", game.GameTimerManager);
 		//adds herodeathmanager into the game
@@ -106,6 +109,8 @@ var game = {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 		me.state.set(me.state.SPENDEXP, new game.SpendExp());
+		me.state.set(me.state.LOAD, new game.LoadProfile());
+		me.state.set(me.state.NEW, new game.NewProfile());
 
 		// Start the game.
 		me.state.change(me.state.MENU );
