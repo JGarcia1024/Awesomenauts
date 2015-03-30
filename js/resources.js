@@ -4,42 +4,21 @@ game.resources = [
 	 * @example
 	 * {name: "example", type:"image", src: "data/img/example.png"},
 	 */
-	//loads the background tiles from the data folder, allowing it to display them on the map
-	{name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
-	//loads the background tiles from the data folder, allowing it to display them on the map
-	{name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
-	//loads the orc player from the data folder, allowing it to display it on the map
-	{name: "player", type:"image", src: "data/img/orcSpear.png"},
+	 // loads our background tiles
+	 {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
+	 // loads meta-tiles
+	 {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
+	 // loads the character
+	 {name: "player", type:"image", src: "data/img/orcSpear.png"},
+	 //loads the tower
+	 {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
+	 //loads the image for our creep/ enemy
+	 {name: "creep1", type:"image", src: "data/img/brainmonster.png"},
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//enmy hero hack
-	//loads the orc player from the data folder, allowing it to display it on the map
-	{name: "enemyhero", type:"image", src: "data/img/skeletonDagger.png"},
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//loads the tower entity from the data folder, allowing it to display it on the map
+	 {name: "Player2", type:"image", src: "data/img/gloop.png"},
 
-	{name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
-	//loads the brainmonster entity from the data folder, allowing it to display it on the map
-	{name: "creep1", type:"image", src: "data/img/brainmonster.png"},
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//freind creep hack
-	//loads the oneeye entity from the data folder, allowing it to display it on the map
-	{name: "creep2", type:"image", src: "data/img/gloop.png"},
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//loads the title-screen image from the data folder, allowing it to display it on the map
-	{name: "title-screen", type:"image", src: "data/img/skyrim.jpg"},
-	//loads the exp-screen image from the data folder, allowing it to display it on the map
-	{name: "exp-screen", type:"image", src: "data/img/perktree.jpg"},
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//pause screen hack
-	//loads the pause-screen image from the data folder, allowing it to display it on the map
-	{name: "pause-screen", type:"image", src: "data/img/paused.jpg"},
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	 {name: "title-screen", type:"image", src: "data/img/title.png"},
+	 {name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
 	/* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
@@ -50,18 +29,18 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.tmx"},
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
-
- 	//loads the map from the map folder and dislplays it
- 	{name: "level01", type: "tmx", src: "data/map/test.tmx"},
-
-
+ 	 // loads level01 
+ 	 {name: "level01", type: "tmx", src: "data/map/test.tmx"},
 	/* Background music. 
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
-	 */	
+	 */
+	 {name: "Zelda Main Theme Song", type: "audio", src: "data/bgm/"},	
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
+	 {name: "jump", type: "audio", src: "data/sfx/"},
+	 {name: "stomp", type: "audio", src: "data/sfx/"}
 ];

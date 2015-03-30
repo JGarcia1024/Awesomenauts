@@ -8,9 +8,7 @@
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon" href="icons/touch-icon-iphone-60x60.png">
-        <link rel="stylesheet" href="../fonts/flame.TTF">
-        <link rel="stylesheet" href="../fonts/halo.TTF">
-        <link rel="apple-touch-icon" sizes="76x76" href="fonts/touch-icon-ipad-76x76.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="icons/touch-icon-ipad-76x76.png">
         <link rel="apple-touch-icon" sizes="120x120" href="icons/touch-icon-iphone-retina-120x120.png">
         <link rel="apple-touch-icon" sizes="152x152" href="icons/touch-icon-ipad-retina-152x152.png">
 	</head>
@@ -30,20 +28,16 @@
 		<script type="text/javascript" src="js/resources.js"></script>
 
 		<script type="text/javascript" src="js/entities/entities.js"></script>
-		<script type="text/javascript" src="js/entities/HUD.js"></script>
+		<script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script>
 		<script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
-		<script type="text/javascript" src="js/entities/FriendCreep.js"></script>
 		<script type="text/javascript" src="js/entities/GameManager.js"></script>
-		<script type="text/javascript" src="js/entities/Orc.js"></script>
-		<script type="text/javascript" src="js/entities/Skeleton.js"></script>
-		<script type="text/javascript" src="js/entities/OrcBase.js"></script>
-		<script type="text/javascript" src="js/entities/SkeletonBase.js"></script>
+		<script type="text/javascript" src="js/entities/Player2.js"></script>
+		<script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
+		<script type="text/javascript" src="js/entities/HUD.js"></script>
 
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
-		<!-- links the exp-screen -->
 		<script type="text/javascript" src="js/screens/spendExp.js"></script>
-
 		<!-- /build -->
 		<!-- Bootstrap & Mobile optimization tricks -->
 		<script type="text/javascript">

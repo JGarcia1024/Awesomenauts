@@ -6,38 +6,38 @@ var game = {
 	data : {
 		// score
 		score : 0,
-		paused: false,
-		enemyBaseHealth : 1,
+		//global variables that we can use throughout the game
+		enemyBaseHealth: 1,
 		playerBaseHealth: 1,
-		enemyCreepHealth: 5,
+		enemyCreepHealth: 10,
 		playerHealth: 10,
-		friendCreepHealth: 5,
 		enemyCreepAttack: 1,
-		friendCreepAttack: 1,
 		playerAttack: 1,
+		//orcBaseDamage: 10,
+		//orcBaseHealth: 100,
+		//orcBaseSpeed: 3,
+		//orcBaseDefense: 0,
 		playerAttackTimer: 1000,
-		creepAttackTimer: 1000,
-		playerMoveSpeed: 8,
+		enemyCreepAttackTimer: 1000,
+		playerMoveSpeed: 5,
 		creepMoveSpeed: 5,
-		gameTimeManager: "",
-		HeroDeathManager: "",
-		player: "",
-		EnemyHero: "",
-		pauseScreen: "",
+		gameTimerManager:"",
+		herodeathmanager: "",
+		player:"",
 		exp: 0,
 		gold: 0,
 		exp1: 0,
 		exp2: 0,
 		exp3: 0,
 		exp4: 0,
-		win: 0
+		win: ""
+
 	},
 	
 	
 	// Run on page load.
 	"onload" : function () {
 	// Initialize the video.
-	//sets the height and width of the screen
 	if (!me.video.init("screen",  me.video.CANVAS, 1067, 600, true, '1.0')) {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
@@ -49,14 +49,14 @@ var game = {
 			me.plugin.register.defer(this, debugPanel, "debug");
 		});
 	}
-	//creates a place to save these 5 variables
+	// creates a safe engine with these variables
 	me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
-	console.log(game.data.exp);
-	console.log(game.data.exp2);
-
 	me.state.SPENDEXP = 112;
-	me.state.SPENDEXP = 113;
+
+	//prints out gameover function from gamemanager.js
+	//console.log(game.data.exp);
+	//console.log(game.data.exp2);
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
@@ -73,36 +73,30 @@ var game = {
 
 	// Run on game resources loaded.
 	"loaded" : function () {
-		//adds player to pool
+		// registers the character entitie into the game
 		me.pool.register("player", game.PlayerEntity, true);
-		//adds player base to pool
-		me.pool.register("PlayerBase", game.PlayerBaseEntity);
-		//adds enemy hero base to pool
-		me.pool.register("EnemyHero", game.EnemyHeroEntity, true);
-		//adds enemy base to pool
-		me.pool.register("EnemyBase", game.EnemyBaseEntity);
-		//adds enemy creep to pool
+		//registers the player base from melon js into the game
+		me.pool.register("PlayerBase", game.PlayerBaseEntity, true);
+		// registers the enemy base from melon js to the game
+		me.pool.register("EnemyBase", game.EnemyBaseEntity, true);
+		//loads the creep character
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
-		//adds friend creep to pool
-		me.pool.register("FriendCreep", game.FriendCreep, true);
-		//registers GameTimeManager
-		me.pool.register("GameTimeManager", game.GameTimeManager);
-		//registers Manager
+
+		me.pool.register("Player2", game.Player2, true);
+		// registers the timer into the game
+		me.pool.register("GameTimerManager", game.GameTimerManager);
+		//adds herodeathmanager into the game
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
-		//registers GameTimeManager
-		me.pool.register("ExperienceManager", game.ExperienceManager);		
+		//adds expierence manager into the game
+		me.pool.register("ExpierenceManager", game.ExpierenceManager);
+
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
-		//creates exp screen
 		me.state.set(me.state.SPENDEXP, new game.SpendExp());
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//pause hack
-		//me.state.set(me.state.PAUSE, new game.PauseScreen());
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 
-		// Start the game with the title screen
-		me.state.change(me.state.MENU);
+		// Start the game.
+		me.state.change(me.state.MENU );
 	}
 };
+
