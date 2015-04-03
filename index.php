@@ -16,6 +16,7 @@
 		<!-- Canvas placeholder -->
 		<div id="screen"></div>
 
+	<!-- creating buttons for login -->
 		<form id="input" method="post">
 			<div class="field">
 				<label for="username">Username</label>

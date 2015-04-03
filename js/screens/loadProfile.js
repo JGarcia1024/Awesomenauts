@@ -5,6 +5,7 @@ game.LoadProfile = me.ScreenObject.extend({
 	onResetEvent: function() {	
 		//adds title screen to the beggining of the game
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('load-screen')), -10); // TODO
+		//showing button ono continue game
 		document.getElementById("input").style.visibility = "visible";
 		document.getElementById("load").style.visibility="visible";
 
@@ -40,6 +41,7 @@ game.LoadProfile = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
+		//hiding button on continue game
 		document.getElementById("input").style.visibility = "visible";
 		document.getElementById("load").style.visibility="visible";
 
