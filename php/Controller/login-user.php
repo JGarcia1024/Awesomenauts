@@ -1,7 +1,7 @@
 <?php
 	//query user
 	require_once(__DIR__ . "/../Model/Config.php");
-
+	//creating array for exps
 	$array = array(
 			'exp'=> '',
 			'exp1'=> '',
