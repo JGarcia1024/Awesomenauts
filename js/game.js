@@ -59,6 +59,7 @@ var game = {
 			me.plugin.register.defer(this, debugPanel, "debug");
 		});
 	}
+	
 
 	me.state.SPENDEXP = 112;
 	me.state.LOAD = 113;

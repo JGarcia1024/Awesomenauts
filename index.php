@@ -14,23 +14,26 @@
 	</head>
 	<body>
 		<!-- Canvas placeholder -->
+		<!-- screen for the user to enter/create their username and password -->
 		<div id="screen"></div>
-
-	<!-- creating buttons for login -->
+		<!-- enables the user to create a username on the start page -->
 		<form id="input" method="post">
 			<div class="field">
 				<label for="username">Username</label>
 				<input type='text' name='username' id='username' autocomplete='off'>
 			</div>
-			
-			<div class='password'>
-				<label for='password'>Password</label>
-				<input type='text' name='password' id='password'>
-			</div>
+		<!-- enables the user to create a password on the start page -->
+		<div class='password'>
+			<label for='password'>Password</label>
+			<input type='text' name='password' id='password'>
+		</div>
+		<!-- creates a register button so that the user can input their username and password -->
+		<button type='button' id='register'>Register</button>
+		<!-- creates a load button so that the user can load their username and password -->
+		<button type='button' id='load'>Load</button>
+		<!--creates a main menu button so that the user can return to the main menu at any time -->
+		<button type='button' id='mainmenu'>Main Menu</button>
 
-			<button type='button' id='register'>Register</button>
-			<button type='button' id='load'>Load</button>
-			<button type='button' id='mainmenu'>Main Menu</button>
 		</form>
 
 		<!-- melonJS Library -->

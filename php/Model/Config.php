@@ -1,21 +1,27 @@
 <?php
-		
-	require_once(__DIR__ . "/database.php");
-		//preserves information to create only 1
+	require_once(__DIR__ . "/Database.php");
+	// perseves information so that we dont have to create/generate that information, so that when we preserve it, it will be avaliable throughout our code
+	//starts our session variable
 	session_start();
-	//creates new id
 	session_regenerate_id(true);
-		//access post.php
-	$path = "/JoshuaGAwesomenauts/php/";
+// variable stores the path for our blog project
+$path = "/awesomenauts/php/";
 
-	$host = "localhost";
-	$username = "root";
-	$password = "root";
-	$database = "awesomenauts_db";
-	//checks if variable is called session and exists
-	if(!isset($_SESSION["connection"])) {
-		//creates new object stored in connection
-		$connection = new Database($host, $username, $password, $database);
-		//create session variable
-		$_SESSION["connection"] = $connection;
+/* the variable that has our local host stored in it*/
+ $host = "localhost";
+ /* the variable username is the name of our username for our php admin account*/
+ $username = "root";
+ // the variable password is our password for our php admin account
+ $password = "root"; 
+ // the variable database stores the name the name of our database
+ $database = "awesomenauts_db";
+
+// isset checks if $_SESSION has the same $connection stored in it; only creates database once
+if(!isset($_SESSION["connection"])) {
+ 	// new database object that helps query on the database
+	 $connection = new Database($host, $username, $password, $database);
+	 //stores variable connection in the variable session
+	 $_SESSION["connection"] = $connection;
 }
+
+?>

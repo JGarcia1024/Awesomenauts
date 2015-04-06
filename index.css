@@ -31,17 +31,18 @@ body {
 	image-rendering: optimize-contrast;
 	-ms-interpolation-mode: nearest-neighbor;
 }
-/* creating css to hide load button */
+/*style for the input button such as when it is visible and invisble on the website*/
 #input{
 	display: block;
 	text-align: center;
 	visibility: hidden;
-}
 
+}
+/*style for the load button such as when it is visible and invisble on the website*/
 #load{
 	visibility: hidden;
 }
-
+/*style for the register button such as when it is visible and invisble on the website*/
 #register{
 	visibility: hidden;
 }

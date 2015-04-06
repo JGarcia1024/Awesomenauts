@@ -1,39 +1,55 @@
 <?php
-	//query user
-	require_once(__DIR__ . "/../Model/Config.php");
-	//creating array for exps
-	$array = array(
-			'exp'=> '',
-			'exp1'=> '',
-			'exp2'=> '',
-			'exp3'=> '',
-			'exp4'=> '',
+	// require once links config.php file to login-user.php file
+   require_once(__DIR__ . "/../model/config.php");	
 
-		);
+// adds exp variables from config.php and game.js
+   $array = array(
+      'exp'=> '',
+      'exp1'=> '',
+      'exp2'=> '',
+      'exp3'=> '',
+      'exp4'=> '',
+      );
 
-	$username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
-	$password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
+   // username and password variable help you login with authenication
+   $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+   $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 
-		//builds new query
-	$query = $_SESSION["connection"]->query("SELECT * FROM users WHERE username = '$username'");
-		//checks to see if login password matches password in database
-	if($query->num_rows == 1) {
-		$row = $query->fetch_array();
+   //query selects salt password from a username in our users table.
+   $query = $_SESSION["connection"]->query("SELECT * FROM users WHERE username = '$username'");
+	
+	//checks if information is stored in the query variable
+   if($query->num_rows == 1) {
+   	 $row = $query->fetch_array();
 
-		if($row["password"] === crypt($password, $row["salt"])) {
-				//if user is authenticated, user has logged in
-			$_SESSION["authenticated"] = true;
-			$array["exp"] = $row["exp"];
-			$array["exp1"] = $row["exp1"];
-			$array["exp2"] = $row["exp2"];
-			$array["exp3"] = $row["exp3"];
-			$array["exp4"] = $row["exp4"];
-			echo json_encode($array);
-		}
-		else {
-			echo "<p>Invalid username and password</p>";
-		}
-	}
-	else {
-		echo "<p>Invalid username and password</p>";
-	}
+   	 //checks if the login was successful
+   	 if($row["password"] === crypt($password, $row["salt"])) {
+   	 	// tells website that the user has logged in
+   	 	$_SESSION["authenticated"] = true;
+         //adds array exp variables into the login successful function
+         $array["exp"] = $row["exp"];
+         //adds array exp variables into the login successful function
+         $array["exp1"] = $row["exp1"];
+         //adds array exp variables into the login successful function
+         $array["exp2"] = $row["exp2"];
+         //adds array exp variables into the login successful function
+         $array["exp3"] = $row["exp3"];
+         //adds array exp variables into the login successful function
+         $array["exp4"] = $row["exp4"];
+         $_SESSION["name"] = $username;
+
+
+   	 	echo json_encode($array);
+   	 }
+   	 // else statement echos if the if statemt was incorrect
+   	 else {
+   	 	echo "<p>Invaild username and password</p>";
+   	 }
+   }
+   // else statement echos if the if statment for $query is not working
+   else {
+   	echo "<p>Invalid username and password</p>";
+   }
+
+?>
+<!-- contoller checks if the session variable has been set, also checks if its true -->
