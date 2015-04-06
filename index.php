@@ -34,7 +34,7 @@
 		<!-- enables the user to create a password on the start page -->
 		<div class='password'>
 			<label for='password'>Password</label>
-			<input type='text' name='password' id='password'>
+			<input type='password' name='password' id='password'>
 		</div>
 		<!-- creates a register button so that the user can input their username and password -->
 		<button type='button' id='register'>Register</button>
@@ -129,10 +129,41 @@
 				alert("Fail");
 			});
 		});
+		// <!-- makes the load key work and execute the action it is suppose to do
+		$("#load").bind("click", function(){
+			$.ajax({
+				type: "POST",
+				url: "php/controller/login-user.php",
+				data: {
+					username: $('#username').val(),
+					password: $('#password').val()
+				},
+				dataType: "text"
+			}) // if the register works then this code will execute
+			.success(function(response){
+				if(response==="Invaild username and password"){
+					alert (response);
+				}else{
+					var data = jQuery.parseJSON(response);
+					game.data.exp = data["exp"];
+					game.data.exp1 = data["exp1"];
+					game.data.exp2 = data["exp2"];
+					game.data.exp3 = data["exp3"];
+					game.data.exp4 = data["exp4"];
+					me.state.change(me.state.SPENDEXP);
+				}
+			})
+			//if the register doesnt work this code will execute
+			.fail(function(response){
+				//if it doesnt work this will be printed
+				alert("Fail");
+			});
+		});
 		
 
 		</script>
 
 	</body>
 </html>
+
 

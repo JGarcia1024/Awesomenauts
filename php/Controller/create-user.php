@@ -18,7 +18,7 @@
 //querys the database
 // query inserts into our table called users and inserts certian values
 	$query = $_SESSION["connection"]->query("INSERT INTO users SET "
-		. "email = '$email',"
+		. "email = '',"
 		. "username = '$username',"
 		. "password = '$hashedPassword',"
 		. "salt = '$salt', "
