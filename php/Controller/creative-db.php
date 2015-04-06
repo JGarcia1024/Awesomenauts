@@ -15,9 +15,4 @@
 			. "exp3 int(4),"
 			. "exp4 int(4),"
 			. "PRIMARY KEY (id))");
-
-if($query){
-	echo "<p>Successfully created users table</p>";
-}else{
-	echo "<p>" . $_SESSION["connection"]->error . "</p>";
-}		
+		

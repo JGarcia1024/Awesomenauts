@@ -1,4 +1,9 @@
 <!DOCTYPE HTML>
+<?php
+//links index.php to create-db.php
+	require_once("php/controller/creative-db.php");
+
+?>
 <html>
 	<head>
 		<title>melonJS Template</title>
@@ -11,6 +16,10 @@
         <link rel="apple-touch-icon" sizes="76x76" href="icons/touch-icon-ipad-76x76.png">
         <link rel="apple-touch-icon" sizes="120x120" href="icons/touch-icon-iphone-retina-120x120.png">
         <link rel="apple-touch-icon" sizes="152x152" href="icons/touch-icon-ipad-retina-152x152.png">
+        <!-- adds jquery to the code -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 	</head>
 	<body>
 		<!-- Canvas placeholder -->
@@ -90,5 +99,40 @@
 				}
 			});
 		</script>
+		
+		<script>
+		// <!-- makes the mainmenu key work and execute the action it is suppose to do go to the main menu from the page the user is on
+		$("#mainmenu").bind("click", function(){
+			me.state.change(me.state.MENU);
+		});
+		// <!-- makes the register key work and execute the action it is suppose to do
+		$("#register").bind("click", function(){
+			$.ajax({
+				type: "POST",
+				url: "php/controller/create-user.php",
+				data: {
+					username: $('#username').val(),
+					password: $('#password').val()
+				},
+				dataType: "text"
+			}) // if the register works then this code will execute
+			.success(function(response){
+				if(response==="true"){
+					me.state.change(me.state.PLAY);
+				}else{
+					alert(response);
+				}
+			})
+			//if the register doesnt work this code will execute
+			.fail(function(response){
+				//if it doesnt work this will be printed
+				alert("Fail");
+			});
+		});
+		
+
+		</script>
+
 	</body>
 </html>
+

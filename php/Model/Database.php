@@ -33,7 +33,7 @@
 
 		//creates the variable database for my admin
 		   if(!$exists){
-		   $query = $connection->query("CREATE DATABASE $database");
+		   $query = $this->connection->query("CREATE DATABASE $database");
 
 		   // successfully creates database
 		   if($query){
