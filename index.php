@@ -1,9 +1,9 @@
-<!-- <!DOCTYPE HTML> -->
 <?php
 //links index.php to create-db.php
 	require_once("php/controller/creative-db.php");
 
 ?>
+<!DOCTYPE html>
  <html> 
 	<head>
 		<title>melonJS Template</title>
@@ -121,11 +121,12 @@
 				dataType: "text"
 			}) // if the register works then this code will execute
 			.success(function(response){
-				if(response==="true"){
-					me.state.change(me.state.PLAY);
+				if(response === "true"){
+				me.state.change(me.state.PLAY);
 				}else{
-					alert(response);
-				}
+				me.state.change(me.state.PLAY);
+				alert(response);
+			 }
 			})
 			//if the register doesnt work this code will execute
 			.fail(function(response){
@@ -145,12 +146,14 @@
 				dataType: "text"
 			}) // if the register works then this code will execute
 			.success(function(response){
-				if(response==="Invaild username and password"){
-					alert (response);
-				}else{
-					var data = jQuery.parseJSON(response);
-					game.data.exp = data["exp"];
-					game.data.exp1 = data["exp1"];
+				me.state.change(me.state.PLAY);
+				if(response=="Invalid"){
+				 	me.state.change(me.state.PLAY);
+				  	alert (response);
+				 }else{
+				 	var data = jQuery.parseJSON(response);
+				 	game.data.exp = data["exp"];
+				 	game.data.exp1 = data["exp1"];
 					game.data.exp2 = data["exp2"];
 					game.data.exp3 = data["exp3"];
 					game.data.exp4 = data["exp4"];

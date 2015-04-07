@@ -38,18 +38,14 @@
          $array["exp4"] = $row["exp4"];
          $_SESSION["name"] = $username;
 
-
    	 	echo json_encode($array);
    	 }
    	 // else statement echos if the if statemt was incorrect
    	 else {
-   	 	echo "Invaild username and password";
+   	 	echo "Invalid username and password";
    	 }
    }
    // else statement echos if the if statment for $query is not working
    else {
    	echo "Invalid username and password";
    }
-
-?>
-<!-- contoller checks if the session variable has been set, also checks if its true -->

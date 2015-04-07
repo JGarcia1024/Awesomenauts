@@ -5,12 +5,12 @@ game.MiniMap = me.Entity.extend({
 		//tells how big the map is
 		this._super(me.Entity, "init", [x, y, {
 			image: "minimap",
-			width: 699,
-			height: 114,
-			spritewidth: "699",
-			spriteheight: "114",
+			width: 376,
+			height: 217,
+			spritewidth: "376",
+			spriteheight: "217",
 			getShape: function(){
-				return (new me.Rect(0, 0, 699, 144)) .toPolygon();
+				return (new me.Rect(0, 0, 376, 217)) .toPolygon();
 			}
 		}]);
 		//tells that the map will be floating

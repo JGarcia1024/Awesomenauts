@@ -15,7 +15,7 @@ game.MiniPlayerLocation = me.Entity.extend({
 		this.settings = this.diameter;
 		this.floating = true;
 		this.image = me.video.createCanvas(this.settings.width, this,settings.height);
-		var ctx = me.video.renderer.getContex2d(this.image);
+		var ctx = me.video.renderer.getContext2d(this.image);
 
 		ctx.fillStyle = "rgba(0, 192, 32, 0, 75)";
 		ctx.strokeStyle = "blue";
