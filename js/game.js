@@ -112,6 +112,8 @@ var game = {
 		me.pool.register("spear", game.SpearThrow);
 		//adds the minimap to the game
 		me.pool.register("minimap", game.MiniMap, true);
+		//adds the miniplayerlocation to the game
+		me.pool.register("miniplayer", game.MiniPlayerLocation, true);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
