@@ -23,6 +23,7 @@ var game = {
 		creepMoveSpeed: 5,
 		gameTimerManager:"",
 		herodeathmanager: "",
+		spearTimer: 15,
 		player:"",
 		exp: 0,
 		gold: 0,
@@ -103,6 +104,8 @@ var game = {
 		me.pool.register("ExpierenceManager", game.ExpierenceManager);
 		//adds the resource spend gold into the game
 		me.pool.register("SpendGold", game.SpendGold);
+		// adds the spear throw resource into the game
+		me.pool.register("spear", game.SpearThrow);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());

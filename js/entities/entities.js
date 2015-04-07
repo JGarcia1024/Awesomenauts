@@ -49,6 +49,9 @@ game.PlayerEntity = me.Entity.extend({
 		this.now = new Date().getTime();
 		//lets the character hit the other characters over and over again
 		this.lastHit = this.now;
+		//controls when the next spear spons
+		this.lastSpear = this.now;
+		//controls when the time of the last attack was
 		this.lastAttack = new Date().getTime();
 	},
 
@@ -99,6 +102,8 @@ game.PlayerEntity = me.Entity.extend({
 		//leads to fucntion below
 		//organizes code
 		this.checkKeyPressesAndMove ();
+		//checks the characters ability keys
+		this.checkAbilityKeys();
 		//organizes our code
 		this.setAnimation();
 		//checks for collisions
@@ -177,6 +182,29 @@ game.PlayerEntity = me.Entity.extend({
 			me.audio.play("stomp");
 
  	},
+ 	//checks the players ability. Like if they are elligable for an update or more gold
+ 	checkAbilityKeys: function(){
+ 		//checks if the skill key is pressed
+ 		if(me.input.isKeyPressed("skill1")){
+ 			//this.speedBurst();
+ 		}else if(me.input.isKeyPressed("skill2")){
+ 			//this.eatCreep();
+ 		}else if(me.input.isKeyPressed("skill3")){
+ 			this.throwSpear();
+ 		}
+ 	},
+ 	//enables the player to throw the spear
+ 	throwSpear: function(){
+ 		//sets the spear timer to tell when the next spear can spon
+ 		if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
+ 		//controls when the spear spons
+		this.lastSpear = this.now;
+		//bulids a spear and puts it into the world
+		var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+		me.game.world.addChild(spear, 10);
+	}
+ 	}, 
+
  	//linked to attack fucntion in update class
  	setAnimation: function(){
  		//if attack key is pressed character will attack
