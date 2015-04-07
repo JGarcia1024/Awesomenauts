@@ -37,6 +37,10 @@ game.PlayScreen = me.ScreenObject.extend({
 		//adds expierence manager into the game/world
 		me.game.world.addChild(spendGold, 0);
 
+		//adds the minimap into the game
+		game.data.minimap = me.pool.pull("minimap", 10, 10, {});
+		me.game.world.addChild(game.data.minimap, 30);
+
 		me.input.bindKey(me.input.KEY.B, "buy");
 		me.input.bindKey(me.input.KEY.Q, "skill1");
 		me.input.bindKey(me.input.KEY.W, "skill2");

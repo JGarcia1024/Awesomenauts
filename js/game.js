@@ -43,7 +43,8 @@ var game = {
 		win: "",
 		pausePos: "",
 		buyscreen: "",
-		buytext: ""
+		buytext: "",
+		minimap: ""
 
 
 	},
@@ -109,6 +110,8 @@ var game = {
 		me.pool.register("SpendGold", game.SpendGold);
 		// adds the spear throw resource into the game
 		me.pool.register("spear", game.SpearThrow);
+		//adds the minimap to the game
+		me.pool.register("minimap", game.MiniMap, true);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
