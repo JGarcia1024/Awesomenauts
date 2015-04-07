@@ -6,6 +6,9 @@ var game = {
 	data : {
 		// score
 		score : 0,
+		//fixes pointer problem with game
+		option1: "",
+		option2: "",
 		//global variables that we can use throughout the game
 		enemyBaseHealth: 1,
 		playerBaseHealth: 1,

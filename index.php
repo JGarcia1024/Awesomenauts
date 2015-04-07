@@ -1,10 +1,10 @@
-<!DOCTYPE HTML>
+<!-- <!DOCTYPE HTML> -->
 <?php
 //links index.php to create-db.php
 	require_once("php/controller/creative-db.php");
 
 ?>
-<html>
+ <html> 
 	<head>
 		<title>melonJS Template</title>
 		<link rel="stylesheet" type="text/css" media="screen" href="index.css">
@@ -66,6 +66,8 @@
 		<script type="text/javascript" src="js/entities/Player2.js"></script>
 		<script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
 		<script type="text/javascript" src="js/entities/HUD.js"></script>
+		<script type="text/javascript" src="js/entities/SpearThrow.js"></script>
+
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
 		<script type="text/javascript" src="js/screens/spendExp.js"></script>

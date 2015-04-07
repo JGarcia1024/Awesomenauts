@@ -6,9 +6,8 @@ game.TitleScreen = me.ScreenObject.extend({
 		//adds title screen to the beggining of the game
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); // TODO
 	    
-
-		//adds the word awesomenauts to the game
-		me.game.world.addChild(new (me.Renderable.extend({
+		//fixes pointer problem
+		game.data.option1 = new (me.Renderable.extend({
 			init: function(){
 				this._super(me.Renderable, 'init', [270, 240, 300, 50]);
 				this.font = new me.Font("Arial", 46, "white");
@@ -30,10 +29,12 @@ game.TitleScreen = me.ScreenObject.extend({
 			    me.input.releasePointerEvent('pointerdown', game.data.option2);
 				me.state.change(me.state.NEW);
 			}
-		})));
+		}));
+
+		me.game.world.addChild(game.data.option1);
 
 		//adds the word awesomenauts to the game
-		me.game.world.addChild(new (me.Renderable.extend({
+		game.data.option2 = new (me.Renderable.extend({
 			init: function(){
 				this._super(me.Renderable, 'init', [270, 340, 250, 50]);
 				this.font = new me.Font("Arial", 46, "white");
@@ -55,8 +56,9 @@ game.TitleScreen = me.ScreenObject.extend({
 				me.input.releasePointerEvent('pointerdown', game.data.option2);
 				me.state.change(me.state.LOAD);
 			}
-		})));
+		}));
 
+		me.game.world.addChild(game.data.option2);
 		//me.game.world.addChild(game.data.option2);
 		
 	},
