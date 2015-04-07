@@ -196,11 +196,11 @@ game.PlayerEntity = me.Entity.extend({
  	//enables the player to throw the spear
  	throwSpear: function(){
  		//sets the spear timer to tell when the next spear can spon
- 		if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
+ 		if((this.now-this.lastSpear) >= game.data.spearTimer*1000 && game.data.ability3 > 0){
  		//controls when the spear spons
 		this.lastSpear = this.now;
 		//bulids a spear and puts it into the world
-		var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+		var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {}, this.facing);
 		me.game.world.addChild(spear, 10);
 	}
  	}, 
