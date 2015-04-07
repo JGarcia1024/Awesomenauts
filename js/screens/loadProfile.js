@@ -41,9 +41,9 @@ game.LoadProfile = me.ScreenObject.extend({
 	 */
 	onDestroyEvent: function() {
 		//makes it so that when the user logs onto the load profile page they see the input button
-		document.getElementById("input").style.visibility ="visible";
+		document.getElementById("input").style.visibility ="hidden";
 		//makes it so that when the user logs onto the load profile page they see the load button
-		document.getElementById("load").style.visibility="visible";
+		document.getElementById("load").style.visibility="hidden";
 	}
 });
 
